@@ -505,7 +505,7 @@ var LoginPageComponent = /** @class */ (function () {
         this.spinner.show();
         var user = new app_model_user__WEBPACK_IMPORTED_MODULE_6__["UserAccount"]();
         user.password = this.password;
-        user.feature = "";
+        user.feature = "Admin";
         //  localStorage.setItem("email",email);
         //this.getIP();
         this.http.post(environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].smartSafeAPIUrl + '/userInfo/login', user, this.httpOptions).subscribe(function (res) {
