@@ -52,6 +52,11 @@ public class UserService {
 		userInfo.setPassword(userInfoRequest.getPassword());
 		userInfo.setCreate_time(LocalDate.now());
 		userInfo.setActive(true);
+		userInfo.setFirstName(userInfoRequest.getFirstName());
+		userInfo.setLastName(userInfoRequest.getLastName());
+		userInfo.setEmail(userInfoRequest.getEmail());
+		userInfo.setMobile(userInfoRequest.getMobile());
+		
 		if(userInfoRequest.getLoggedUserId()!=null) {
 		Optional<UserInfo> optionalAdminUser = userInfoRepository.findById(userInfoRequest.getLoggedUserId());
 		System.out.println("i'm died not able to reach here ");
@@ -99,9 +104,7 @@ public class UserService {
 	}
 
 	public void updateUser(UserInfoRequest userInfoRequest) {
-
 		Role role = roleRepository.findByName(userInfoRequest.getRole());
-
 		UserInfo userInfo = userInfoRepository.findByUsername(userInfoRequest.getUsername());
 		if (userInfo != null && !userInfo.getId().equals(userInfoRequest.getId())) {
 			throw CommonException.CreateException(CommonExceptionMessage.ALREADY_EXISTS, "Username");
@@ -117,6 +120,11 @@ public class UserService {
 		info.setUsername(userInfoRequest.getUsername());
 		info.setRole(role);
 		info.setActive(userInfoRequest.isActive());
+		info.setFirstName(userInfoRequest.getFirstName());
+		info.setLastName(userInfoRequest.getLastName());
+		info.setEmail(userInfoRequest.getEmail());
+		info.setMobile(userInfoRequest.getMobile());
+		
 		userInfoRepository.save(info);
 
 	}

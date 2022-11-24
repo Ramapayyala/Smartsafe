@@ -1,6 +1,7 @@
 package com.safesmart.safesmart.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.safesmart.safesmart.builder.RoleBuilder;
 import com.safesmart.safesmart.dto.RoleDto;
 import com.safesmart.safesmart.model.Role;
-import com.safesmart.safesmart.model.UserInfo;
 import com.safesmart.safesmart.repository.RoleRepository;
 
 @Service
@@ -28,6 +28,18 @@ public class RoleService {
 		Role role = roleBuilder.toModel(roleDto);
 
 		roleRepository.save(role);
+	}
+	public void upDate(RoleDto roleDto) {
+		
+		Long id = roleDto.getId();
+		Role role = roleRepository.findById(id).get();
+		role = roleBuilder.toUpdate(roleDto);
+
+		roleRepository.save(role);
+	}
+	
+	public void toDelete(Long id) {
+		roleRepository.deleteById(id);
 	}
 
 	@JsonIgnore
