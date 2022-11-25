@@ -133,12 +133,18 @@ public class UserInfoRequest {
 		if (role.isEmpty()) {
 			throw CommonException.CreateException(CommonExceptionMessage.REQUIRED_ATTRIBUTE, "Role");
 		}
-
 		String regex = "[0-9]+";
-		// Compile the ReGex
 		Pattern p = Pattern.compile(regex);
+		if(role.equals("ADMIN") || role.equals("SHIFTMANAGER") || role.equals("MANAGER")) {
+			System.out.println("in pin error");
+			if (password.length() != 6 || !p.matcher(password).matches()) {
+				throw CommonException.CreateException(CommonExceptionMessage.VALIDATE_ADMIN_PIN);
+			}	
+		}
+		else {
 		if (password.length() != 4 || !p.matcher(password).matches()) {
 			throw CommonException.CreateException(CommonExceptionMessage.VALIDATE_PIN);
+		}
 		}
 
 	}
